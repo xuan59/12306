@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xy.dao.TrainInfoDao">
+
+    <resultMap id="BaseResultMap" type="com.xy.entity.TrainInfo">
+        <!--@Table train_info-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="trains" column="trains" jdbcType="VARCHAR"/>
+        <result property="startStation" column="start_station" jdbcType="VARCHAR"/>
+        <result property="stopStation" column="stop_station" jdbcType="VARCHAR"/>
+        <result property="endStation" column="end_station" jdbcType="VARCHAR"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+        <result property="businessSeat" column="business_seat" jdbcType="INTEGER"/>
+        <result property="businessSeatPrice" column="business_seat_price" jdbcType="NUMERIC"/>
+        <result property="firstSeat" column="first_seat" jdbcType="INTEGER"/>
+        <result property="firstSeatPrice" column="first_seat_price" jdbcType="NUMERIC"/>
+        <result property="secondSeat" column="second_seat" jdbcType="INTEGER"/>
+        <result property="secondSeatPrice" column="second_seat_price" jdbcType="NUMERIC"/>
+        <result property="hardSeat" column="hard_seat" jdbcType="INTEGER"/>
+        <result property="hardSeatPrice" column="hard_seat_price" jdbcType="NUMERIC"/>
+        <result property="noSeat" column="no_seat" jdbcType="INTEGER"/>
+        <result property="noSeatPrice" column="no_seat_price" jdbcType="NUMERIC"/>
+        <result property="softSleeper" column="soft_sleeper" jdbcType="INTEGER"/>
+        <result property="softSleeperPrice" column="soft_sleeper_price" jdbcType="NUMERIC"/>
+        <result property="hardSleeper" column="hard_sleeper" jdbcType="INTEGER"/>
+        <result property="hardSleeperPrice" column="hard_sleeper_price" jdbcType="NUMERIC"/>
+        <result property="shutdownTrain" column="shutdown_train" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, trains, start_station, stop_station, end_station, start_time, end_time, business_seat, business_seat_price, first_seat, first_seat_price, second_seat, second_seat_price, hard_seat, hard_seat_price, no_seat, no_seat_price, soft_sleeper, soft_sleeper_price, hard_sleeper, hard_sleeper_price, shutdown_train
+        from train_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, trains, start_station, stop_station, end_station, start_time, end_time, business_seat, business_seat_price, first_seat, first_seat_price, second_seat, second_seat_price, hard_seat, hard_seat_price, no_seat, no_seat_price, soft_sleeper, soft_sleeper_price, hard_sleeper, hard_sleeper_price, shutdown_train
+        from train_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, trains, start_station, stop_station, end_station, start_time, end_time, business_seat, business_seat_price, first_seat, first_seat_price, second_seat, second_seat_price, hard_seat, hard_seat_price, no_seat, no_seat_price, soft_sleeper, soft_sleeper_price, hard_sleeper, hard_sleeper_price, shutdown_train
+        from train_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="trains != null and trains != ''">
+                and trains = #{trains}
+            </if>
+            <if test="startStation != null and startStation != ''">
+                and start_station = #{startStation}
+            </if>
+            <if test="stopStation != null and stopStation != ''">
+                and stop_station = #{stopStation}
+            </if>
+            <if test="endStation != null and endStation != ''">
+                and end_station = #{endStation}
+            </if>
+            <if test="startTime != null">
+                and start_time = #{startTime}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime}
+            </if>
+            <if test="businessSeat != null">
+                and business_seat = #{businessSeat}
+            </if>
+            <if test="businessSeatPrice != null">
+                and business_seat_price = #{businessSeatPrice}
+            </if>
+            <if test="firstSeat != null">
+                and first_seat = #{firstSeat}
+            </if>
+            <if test="firstSeatPrice != null">
+                and first_seat_price = #{firstSeatPrice}
+            </if>
+            <if test="secondSeat != null">
+                and second_seat = #{secondSeat}
+            </if>
+            <if test="secondSeatPrice != null">
+                and second_seat_price = #{secondSeatPrice}
+            </if>
+            <if test="hardSeat != null">
+                and hard_seat = #{hardSeat}
+            </if>
+            <if test="hardSeatPrice != null">
+                and hard_seat_price = #{hardSeatPrice}
+            </if>
+            <if test="noSeat != null">
+                and no_seat = #{noSeat}
+            </if>
+            <if test="noSeatPrice != null">
+                and no_seat_price = #{noSeatPrice}
+            </if>
+            <if test="softSleeper != null">
+                and soft_sleeper = #{softSleeper}
+            </if>
+            <if test="softSleeperPrice != null">
+                and soft_sleeper_price = #{softSleeperPrice}
+            </if>
+            <if test="hardSleeper != null">
+                and hard_sleeper = #{hardSleeper}
+            </if>
+            <if test="hardSleeperPrice != null">
+                and hard_sleeper_price = #{hardSleeperPrice}
+            </if>
+            <if test="shutdownTrain != null and shutdownTrain != ''">
+                and shutdown_train = #{shutdownTrain}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into train_info(trains, start_station, stop_station, end_station, start_time, end_time, business_seat, business_seat_price, first_seat, first_seat_price, second_seat, second_seat_price, hard_seat, hard_seat_price, no_seat, no_seat_price, soft_sleeper, soft_sleeper_price, hard_sleeper, hard_sleeper_price, shutdown_train)
+        values (#{trains}, #{startStation}, #{stopStation}, #{endStation}, #{startTime}, #{endTime}, #{businessSeat}, #{businessSeatPrice}, #{firstSeat}, #{firstSeatPrice}, #{secondSeat}, #{secondSeatPrice}, #{hardSeat}, #{hardSeatPrice}, #{noSeat}, #{noSeatPrice}, #{softSleeper}, #{softSleeperPrice}, #{hardSleeper}, #{hardSleeperPrice}, #{shutdownTrain})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update train_info
+        <set>
+            <if test="trains != null and trains != ''">
+                trains = #{trains},
+            </if>
+            <if test="startStation != null and startStation != ''">
+                start_station = #{startStation},
+            </if>
+            <if test="stopStation != null and stopStation != ''">
+                stop_station = #{stopStation},
+            </if>
+            <if test="endStation != null and endStation != ''">
+                end_station = #{endStation},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="businessSeat != null">
+                business_seat = #{businessSeat},
+            </if>
+            <if test="businessSeatPrice != null">
+                business_seat_price = #{businessSeatPrice},
+            </if>
+            <if test="firstSeat != null">
+                first_seat = #{firstSeat},
+            </if>
+            <if test="firstSeatPrice != null">
+                first_seat_price = #{firstSeatPrice},
+            </if>
+            <if test="secondSeat != null">
+                second_seat = #{secondSeat},
+            </if>
+            <if test="secondSeatPrice != null">
+                second_seat_price = #{secondSeatPrice},
+            </if>
+            <if test="hardSeat != null">
+                hard_seat = #{hardSeat},
+            </if>
+            <if test="hardSeatPrice != null">
+                hard_seat_price = #{hardSeatPrice},
+            </if>
+            <if test="noSeat != null">
+                no_seat = #{noSeat},
+            </if>
+            <if test="noSeatPrice != null">
+                no_seat_price = #{noSeatPrice},
+            </if>
+            <if test="softSleeper != null">
+                soft_sleeper = #{softSleeper},
+            </if>
+            <if test="softSleeperPrice != null">
+                soft_sleeper_price = #{softSleeperPrice},
+            </if>
+            <if test="hardSleeper != null">
+                hard_sleeper = #{hardSleeper},
+            </if>
+            <if test="hardSleeperPrice != null">
+                hard_sleeper_price = #{hardSleeperPrice},
+            </if>
+            <if test="shutdownTrain != null and shutdownTrain != ''">
+                shutdown_train = #{shutdownTrain},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from train_info where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xy.dao.TripInfoDao">
+
+    <resultMap id="BaseResultMap" type="com.xy.entity.TripInfo">
+        <!--@Table trip_info-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="trainId" column="train_id" jdbcType="INTEGER"/>
+        <result property="payStatus" column="pay_status" jdbcType="VARCHAR"/>
+        <result property="tripStatus" column="trip_status" jdbcType="VARCHAR"/>
+        <result property="isRefund" column="is_refund" jdbcType="INTEGER"/>
+        <result property="ticketChanging" column="ticket_changing" jdbcType="INTEGER"/>
+        <result property="payAmount" column="pay_amount" jdbcType="NUMERIC"/>
+        <result property="discountAmount" column="discount_amount" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, user_id, train_id, pay_status, trip_status, is_refund, ticket_changing, pay_amount, discount_amount
+        from trip_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, user_id, train_id, pay_status, trip_status, is_refund, ticket_changing, pay_amount, discount_amount
+        from trip_info
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, user_id, train_id, pay_status, trip_status, is_refund, ticket_changing, pay_amount, discount_amount
+        from trip_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="trainId != null">
+                and train_id = #{trainId}
+            </if>
+            <if test="payStatus != null and payStatus != ''">
+                and pay_status = #{payStatus}
+            </if>
+            <if test="tripStatus != null and tripStatus != ''">
+                and trip_status = #{tripStatus}
+            </if>
+            <if test="isRefund != null">
+                and is_refund = #{isRefund}
+            </if>
+            <if test="ticketChanging != null">
+                and ticket_changing = #{ticketChanging}
+            </if>
+            <if test="payAmount != null">
+                and pay_amount = #{payAmount}
+            </if>
+            <if test="discountAmount != null">
+                and discount_amount = #{discountAmount}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into trip_info(user_id, train_id, pay_status, trip_status, is_refund, ticket_changing, pay_amount, discount_amount)
+        values (#{userId}, #{trainId}, #{payStatus}, #{tripStatus}, #{isRefund}, #{ticketChanging}, #{payAmount}, #{discountAmount})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update trip_info
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="trainId != null">
+                train_id = #{trainId},
+            </if>
+            <if test="payStatus != null and payStatus != ''">
+                pay_status = #{payStatus},
+            </if>
+            <if test="tripStatus != null and tripStatus != ''">
+                trip_status = #{tripStatus},
+            </if>
+            <if test="isRefund != null">
+                is_refund = #{isRefund},
+            </if>
+            <if test="ticketChanging != null">
+                ticket_changing = #{ticketChanging},
+            </if>
+            <if test="payAmount != null">
+                pay_amount = #{payAmount},
+            </if>
+            <if test="discountAmount != null">
+                discount_amount = #{discountAmount},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from trip_info where id = #{id}
+    </delete>
+
+</mapper>
