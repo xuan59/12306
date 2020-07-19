@@ -29,8 +29,8 @@ public class TrainInfoTest {
     public void add() throws ParseException {
 
         SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
-        Date start = format.parse("2020-07-07 08:20:00");
-        Date end = format.parse("2020-07-07 19:53:00");
+        Date start = format.parse("2020-07-20 08:20:00");
+        Date end = format.parse("2020-07-20 19:53:00");
 
         for(int i=0;i<30;i++) {
             TrainInfo trainInfo = new TrainInfo();

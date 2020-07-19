@@ -45,7 +45,17 @@
     </select>
 
     <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="BaseResultMap">
+    <select id="queryList" resultMap="BaseResultMap">
+        select
+        id, trains, start_station, stop_station, end_station, start_time, end_time, business_seat, business_seat_price, first_seat, first_seat_price, second_seat, second_seat_price, hard_seat, hard_seat_price, no_seat, no_seat_price, soft_sleeper, soft_sleeper_price, hard_sleeper, hard_sleeper_price, shutdown_train
+        from train_info
+        where
+        stop_station like "%${startStation}%${endStation}%"
+        and start_time > #{startTime}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="query" resultMap="BaseResultMap">
         select
           id, trains, start_station, stop_station, end_station, start_time, end_time, business_seat, business_seat_price, first_seat, first_seat_price, second_seat, second_seat_price, hard_seat, hard_seat_price, no_seat, no_seat_price, soft_sleeper, soft_sleeper_price, hard_sleeper, hard_sleeper_price, shutdown_train
         from train_info
@@ -54,7 +64,7 @@
                 and id = #{id}
             </if>
             <if test="trains != null and trains != ''">
-                and trains = #{trains}
+                and trains like #{trains}
             </if>
             <if test="startStation != null and startStation != ''">
                 and start_station = #{startStation}

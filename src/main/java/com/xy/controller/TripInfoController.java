@@ -12,6 +12,7 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2020-06-28 14:33:55
  */
+@CrossOrigin
 @RestController
 @RequestMapping("tripInfo")
 public class TripInfoController {

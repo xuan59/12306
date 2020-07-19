@@ -52,4 +52,11 @@ public interface TrainInfoService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 查询数据
+     *
+     * @param trainInfo 实例对象
+     * @return 实例对象
+     */
+    List<TrainInfo> selectList(TrainInfo trainInfo);
 }

@@ -76,4 +76,15 @@ public class TrainInfoServiceImpl implements TrainInfoService {
     public boolean deleteById(Integer id) {
         return this.trainInfoDao.deleteById(id) > 0;
     }
+
+    /**
+     * 列车信息(TrainInfo)表服务实现类
+     *
+     * @author makejava
+     * @since 2020-07-20 14:34:07
+     */
+    @Override
+    public List<TrainInfo> selectList(TrainInfo trainInfo) {
+        return trainInfoDao.queryList(trainInfo);
+    }
 }

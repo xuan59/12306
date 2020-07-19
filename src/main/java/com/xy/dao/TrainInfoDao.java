@@ -36,7 +36,7 @@ public interface TrainInfoDao {
      * @param trainInfo 实例对象
      * @return 对象列表
      */
-    List<TrainInfo> queryAll(TrainInfo trainInfo);
+    List<TrainInfo> queryList(TrainInfo trainInfo);
 
     /**
      * 新增数据

@@ -1,10 +1,12 @@
 package com.xy.controller;
 
+import com.xy.common.ReturnData;
 import com.xy.entity.TrainInfo;
 import com.xy.service.TrainInfoService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * 列车信息(TrainInfo)表控制层
@@ -12,6 +14,7 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2020-06-28 14:34:07
  */
+@CrossOrigin
 @RestController
 @RequestMapping("trainInfo")
 public class TrainInfoController {
@@ -30,6 +33,13 @@ public class TrainInfoController {
     @RequestMapping("selectOne")
     public TrainInfo selectOne(Integer id) {
         return trainInfoService.queryById(id);
+    }
+
+    @RequestMapping("selectList")
+    public Map selectList(@RequestBody TrainInfo trainInfo) {
+
+        return ReturnData.get("成功", trainInfoService.selectList(trainInfo));
+
     }
 
     @RequestMapping("add")
